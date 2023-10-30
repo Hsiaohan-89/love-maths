@@ -6,11 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let button of buttons) {
         button.addEventListener("click", function () {
-            if (this.getAttribute("data-type") === "submit") {
+            if (this.getAttribute("data-type") === "Submit") {
                 checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
+
             }
         });
     }
@@ -49,9 +50,10 @@ function checkAnswer() {
 
     if (isCorrect) {
         alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
         alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
-
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]);
@@ -76,12 +78,25 @@ function calculateCorrectAnswer() {
 
 }
 
+/**
+ * Gets the current score from the DOM increments it by 1
+ */
 function incrementScore() {
 
+    let oldScore = parseInt(document.getElementById("score").innerText);
+
+    document.getElementById("score").innerText = ++oldScore;
 }
 
+
+/**
+ * Gets the current tally answers from the DOM increments it by 1
+ */
 function incrementWrongAnswer() {
 
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 function displayAdditionQuestion(operand1, operand2) {
